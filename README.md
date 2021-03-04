@@ -6,8 +6,6 @@
 
 </div>
 
-Estrutura de projeto ReactJS utilizando Next.js, Typescript e Styled Components. 🚀
-
 <!-- Bagdes -->
 [styled-components]: https://img.shields.io/badge/styled--components-373a58?style=flat-square&logo=styled-components&labelColor=373a58
 [React]: https://img.shields.io/badge/React-373a58?style=flat-square&logo=react&labelColor=373a58
