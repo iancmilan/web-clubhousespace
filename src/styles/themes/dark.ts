@@ -1,7 +1,7 @@
 export default {
     title: 'dark',
     colors: {
-        primary: '#222',
+        primary: '#0E101B',
         // to-do
     },
 };
