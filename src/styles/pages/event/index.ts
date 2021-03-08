@@ -47,16 +47,21 @@ export const Header = styled.header`
 export const Guests = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
 
     img {
-        /* width: 2.8rem;
-        height: 2.8rem; */
         border-radius: 40%;
         margin-top: 1rem;
     }
 
     img + img {
         margin-left: 0.5rem;
+    }
+
+    strong {
+        font-weight: 600;
+        margin-left: 1rem;
+        margin-top: 0.9rem;
     }
 `;
 

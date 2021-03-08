@@ -59,6 +59,7 @@ const Event: React.FC = () => {
                             style={data.eventGuestsImg.length == 1 ? {width: '4.8rem', height: '4.8rem', } : data.eventGuestsImg.length <= 3 ? {width:'3.8rem', height:'3.8rem',} : {width:'3.4rem', height:'3.4rem',}}
                         />
                     ))}
+                    { data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length > 0 && <strong> +{ data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length} </strong> }
                 </Guests>
                 <Infos>
                     <p>{data.eventGuestsNames}</p>
