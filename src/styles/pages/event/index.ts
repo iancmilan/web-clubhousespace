@@ -32,9 +32,15 @@ export const Header = styled.header`
         font-weight: 600;
     }
 
-    span {
-        font-size: 0.8rem;
-        font-weight: 600;
+    div {
+        span {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.3rem;
+        }
+
+        display: flex;
+        align-items: center;
     }
 `;
 
@@ -43,8 +49,8 @@ export const Guests = styled.div`
     flex-direction: row;
 
     img {
-        width: 2.8rem;
-        height: 2.8rem;
+        /* width: 2.8rem;
+        height: 2.8rem; */
         border-radius: 40%;
         margin-top: 1rem;
     }
@@ -58,8 +64,8 @@ export const Infos = styled.div`
     p {
         line-height: 1rem;
         font-weight: 300;
-        margin-top: 1rem;
-        margin-bottom: 0.4rem;
+        margin-top: 0.3rem;
+        margin-bottom: 1rem;
     }
     span {
         font-weight: 300;
