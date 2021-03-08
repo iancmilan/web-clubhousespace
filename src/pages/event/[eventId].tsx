@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import useSWR from 'swr';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
@@ -18,7 +17,6 @@ interface EventData {
 }
 
 const Event: React.FC = () => {
-    const [eventData, setEventData] = useState<EventData>({} as EventData);
     const router = useRouter();
 
     const { data, error } = useSWR<EventData>(`/event/${router.query.eventId}`, async url => {
@@ -26,7 +24,12 @@ const Event: React.FC = () => {
         return response.data;
     });
 
-    if (error) return <div>failed to load</div>
+    if (error) return (
+        <Container>
+            <h1 style={{ color: 'red', }}>Failed to load data</h1>
+        </Container>
+    );
+
     if (!data) return (
         <Container>
             <SkeletonTheme color="#e6e4d8" highlightColor="#F1EFE4">
