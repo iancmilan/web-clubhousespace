@@ -110,15 +110,3 @@ export const Button = styled.button`
     border: 2px solid ${shade(0.2, '#5eb863')};
   }
 `;
-
-export const Footer = styled.footer`
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1rem;
-
-    font-size: 0.9rem;
-    opacity: 50%;
-    font-weight: 600;
-`;

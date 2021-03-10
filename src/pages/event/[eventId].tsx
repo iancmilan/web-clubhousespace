@@ -3,10 +3,11 @@ import useSWR from 'swr';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { useState } from 'react';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 import api from '../../services/api';
 
-import { Container, Card, CardHeader, Guests, Infos, Button, Footer} from '../../styles/pages/event';
+import { Container, Card, CardHeader, Guests, Infos, Button } from '../../styles/pages/event';
 
 interface EventData {
     eventClub: string;
@@ -38,9 +39,11 @@ const Event: React.FC = () => {
 
     if (!data) return (
         <Container>
+            <Header />
             <SkeletonTheme color="#e6e4d8" highlightColor="#F1EFE4">
                 <Skeleton height='18rem' width="39rem"/>
             </SkeletonTheme>
+            <Footer />
         </Container>
     )
 
@@ -76,9 +79,7 @@ const Event: React.FC = () => {
             <Button onClick={handleLinkToClubhouse}>
                 Open event in Clubhouse
             </Button>
-            <Footer>
-                joinclubhouse.space is not affiliated with Clubhouse or Alpha Exploration Co.
-            </Footer>
+            <Footer />
         </Container>
     );
 }
