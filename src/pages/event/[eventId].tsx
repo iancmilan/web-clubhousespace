@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import useSWR from 'swr';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { useState } from 'react';
@@ -49,10 +50,30 @@ const Event: React.FC = () => {
 
     return (
         <Container>
+            <Head>
+                <title>{data.eventName} | Clubhouse Space</title>
+
+                <meta name="title" content={`${data.eventName} | Clubhouse Space`} />
+                <meta name="description" content={`${data.eventWeekDay}${data.eventMonthDay} ${data.eventGuestsNames}. ${data.eventDescription.replace('                                          —                 ', '')}`} />
+                
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`https://joinclubhouse.space/event/${router.query.eventId}`} />
+                <meta property="og:title" content={data.eventName} />
+                <meta property="og:description" content={`${data.eventWeekDay}${data.eventMonthDay} ${data.eventGuestsNames}. ${data.eventDescription.replace('                                          —                 ', '')}`} />
+                <meta property="og:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="628" />
+
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content={`https://joinclubhouse.space/event/${router.query.eventId}`} />
+                <meta property="twitter:title" content={data.eventName} />
+                <meta property="twitter:description" content={`${data.eventWeekDay}${data.eventMonthDay} ${data.eventGuestsNames}. ${data.eventDescription.replace('                                          —                 ', '')}`} />
+                <meta property="twitter:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+            </Head>
             <Header />
             <Card onClick={handleLinkToClubhouse}>
                 <CardHeader>
-                    <p>{data.eventWeekDay.toUpperCase()} {data.eventMonthDay}</p>
+                    <p>{data.eventWeekDay} {data.eventMonthDay}</p>
                     <strong>{data.eventName}</strong>
                     {data.eventClub && (
                         <div>
