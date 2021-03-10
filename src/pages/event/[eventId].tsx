@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { useState } from 'react';
 
 import api from '../../services/api';
 
-import { Container, Card, Header, Guests, Infos} from '../../styles/pages/event';
+import { Container, Card, CardHeader, Guests, Infos, Button, Footer} from '../../styles/pages/event';
 
 interface EventData {
     eventClub: string;
@@ -24,6 +25,10 @@ const Event: React.FC = () => {
         return response.data;
     });
 
+    function handleLinkToClubhouse(){
+        window.location.href = `https://www.joinclubhouse.com/event/${router.query.eventId}`;
+    }
+
     if (error) return (
         <Container>
             <h1 style={{ color: 'red', }}>Failed to load data</h1>
@@ -40,8 +45,8 @@ const Event: React.FC = () => {
 
     return (
         <Container>
-            <Card>
-                <Header>
+            <Card onClick={handleLinkToClubhouse}>
+                <CardHeader>
                     <p>{data.eventWeekDay.toUpperCase()} {data.eventMonthDay}</p>
                     <strong>{data.eventName}</strong>
                     {data.eventClub && (
@@ -50,7 +55,7 @@ const Event: React.FC = () => {
                             <img src="/icon_house.svg"/>
                         </div>
                     )}
-                </Header>
+                </CardHeader>
                 <Guests>
                     {data.eventGuestsImg.map(img => (
                         <img 
@@ -66,6 +71,12 @@ const Event: React.FC = () => {
                     <span>{data.eventDescription.replace('                                          —                 ', '')}</span>
                 </Infos>
             </Card>
+            <Button onClick={handleLinkToClubhouse}>
+                Open event in Clubhouse
+            </Button>
+            <Footer>
+                joinclubhouse.space is not affiliated with Clubhouse or Alpha Exploration Co.
+            </Footer>
         </Container>
     );
 }
