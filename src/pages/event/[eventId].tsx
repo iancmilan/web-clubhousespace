@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { useState } from 'react';
+import Header from '../../components/Header';
 
 import api from '../../services/api';
 
@@ -45,6 +46,7 @@ const Event: React.FC = () => {
 
     return (
         <Container>
+            <Header />
             <Card onClick={handleLinkToClubhouse}>
                 <CardHeader>
                     <p>{data.eventWeekDay.toUpperCase()} {data.eventMonthDay}</p>

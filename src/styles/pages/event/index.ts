@@ -21,10 +21,16 @@ export const Card = styled.div`
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
     padding: 2.5rem 2rem;
 
+    transition: box-shadow 0.2s;
+
     cursor: pointer;
 
     @media(max-width: 720px) {
         max-width: 22rem;
+    }
+
+    &:hover {
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.1);
     }
 `;
 
