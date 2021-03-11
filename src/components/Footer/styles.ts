@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 export const Container = styled.footer`
     position: fixed;
@@ -14,6 +15,12 @@ export const Container = styled.footer`
     a {
         color: #5eb863;
         margin-left: 0.2rem;
+
+        transition: color 0.2s;
+    }
+
+    a:hover {
+        color: ${shade(0.2, '#5eb863')};
     }
     
     div {
