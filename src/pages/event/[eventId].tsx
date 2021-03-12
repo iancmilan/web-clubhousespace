@@ -77,7 +77,7 @@ const Event: React.FC = () => {
                     <strong>{data.eventName}</strong>
                     {data.eventClub && (
                         <div>
-                            <span>FROM {data.eventClub}</span>
+                            <span>From {data.eventClub}</span>
                             <img src="/icon_house.svg"/>
                         </div>
                     )}
