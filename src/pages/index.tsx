@@ -1,10 +1,19 @@
 import Head from "next/head";
+import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-import { Container } from '../styles/pages/Home';
+import { Container, Card, Form } from '../styles/pages/Home';
 
 const Home: React.FC = () => {
+  // const [eventId, setEventId] = useState('');
+
+  // function getEventId(eventUrl: string) {
+  //   let url = new URL(eventUrl);
+  //   setEventId(url.pathname.replace('/event/', ''));
+  //   console.log(eventId);
+  // }
+
   return (
     <Container>
       <Head>
@@ -28,7 +37,12 @@ const Home: React.FC = () => {
         <meta property="twitter:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
       </Head>
       <Header />
-      <h1>Hello world</h1>
+      <Card>
+        <Form>
+          <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
+          <input type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+        </Form>
+      </Card>
       <Footer />
     </Container>
   );
