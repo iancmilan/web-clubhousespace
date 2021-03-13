@@ -3,7 +3,7 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-import { Container, Card, Form } from '../styles/pages/Home';
+import { Container, Card, Form, WhyUseIt, Why } from '../styles/pages/Home';
 
 const Home: React.FC = () => {
   // const [eventId, setEventId] = useState('');
@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   // }
 
   return (
-    <Container>
+    <>
       <Head>
         <title>Cubhouse Space</title>
 
@@ -37,14 +37,36 @@ const Home: React.FC = () => {
         <meta property="twitter:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
       </Head>
       <Header />
-      <Card>
-        <Form>
-          <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
-          <input type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
-        </Form>
-      </Card>
+      <Container>
+        <Card>
+          <Form>
+            <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
+            <input type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+          </Form>
+        </Card>
+        <WhyUseIt>
+          <Why>
+            <header>
+              <span>Without our link</span>
+              <img src="/withoutOurLink.png" alt="Without Our Link" />
+            </header>
+            <div>
+              <img src="/withoutOurLinkImg.png" alt="With our link image" />
+            </div>
+          </Why>
+          <Why>
+            <header>
+              <span>With our link</span>
+              <img src="/withOurLink.png" alt="With Our Link"/>
+            </header>
+            <div>
+              <img src="/withOurLinkImg.png" alt="Without our link image"/>
+            </div>
+          </Why>
+        </WhyUseIt>
+      </Container>
       <Footer />
-    </Container>
+    </>
   );
 }
 
