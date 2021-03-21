@@ -60,7 +60,7 @@ const Event: React.FC = () => {
                 <meta property="og:url" content={`https://joinclubhouse.space/event/${router.query.eventId}`} />
                 <meta property="og:title" content={data.eventName} />
                 <meta property="og:description" content={`${data.eventWeekDay}${data.eventMonthDay} ${data.eventGuestsNames}. ${data.eventDescription.replace('                                          —                 ', '')}`} />
-                <meta property="og:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+                <meta property="og:image" content={`https://api-clubhousespace.herokuapp.com/preview/${router.query.eventId}`} />
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="628" />
 
@@ -68,7 +68,7 @@ const Event: React.FC = () => {
                 <meta property="twitter:url" content={`https://joinclubhouse.space/event/${router.query.eventId}`} />
                 <meta property="twitter:title" content={data.eventName} />
                 <meta property="twitter:description" content={`${data.eventWeekDay}${data.eventMonthDay} ${data.eventGuestsNames}. ${data.eventDescription.replace('                                          —                 ', '')}`} />
-                <meta property="twitter:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+                <meta property="twitter:image" content={`https://api-clubhousespace.herokuapp.com/preview/${router.query.eventId}`} />
             </Head>
             <Header />
             <Card onClick={handleLinkToClubhouse}>
