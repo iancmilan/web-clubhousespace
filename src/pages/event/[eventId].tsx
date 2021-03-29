@@ -20,13 +20,25 @@ interface EventData {
     eventWeekDay: string;
 }
 
-const Event: React.FC = () => {
+interface dataProps{
+    data: EventData;
+}
+
+export async function getServerSideProps(ctx) {
+    const { eventId } = ctx.query;
+    const res = await fetch(`https://api-clubhousespace.herokuapp.com/event/${eventId}`);
+    const data: dataProps = await res.json();
+    return { props: { data } };
+}
+
+const Event: React.FC<dataProps> = (props) => {
     const router = useRouter();
+    const initialData = props.data;
 
     const { data, error } = useSWR<EventData>(`/event/${router.query.eventId}`, async url => {
         const response = await api.get(url);
         return response.data;
-    });
+    }, { initialData });
 
     function handleLinkToClubhouse(){
         window.location.href = `https://www.joinclubhouse.com/event/${router.query.eventId}`;

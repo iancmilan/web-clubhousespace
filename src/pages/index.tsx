@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       <Head>
         <title>Cubhouse Space</title>
 
-        <meta name="title" content="Cubhouse Space" />
+        <meta name="title" content="CubhouseSpace" />
         <meta name="description" content="Generate a link with a cool preview image to share your Clubhouse events on social media!" />
 
         <meta property="og:type" content="website" />
