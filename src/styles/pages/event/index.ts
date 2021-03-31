@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { shade } from 'polished';
 
 export const Container = styled.div`
-    height: 100vh;
     max-width: 720px;
     margin: 0 auto;
     padding: 2.5rem 2rem;

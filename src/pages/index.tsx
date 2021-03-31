@@ -2,17 +2,26 @@ import Head from "next/head";
 import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import isURL from 'validator/lib/isURL';
 
 import { Container, Card, Form, WhyUseIt, Why } from '../styles/pages/Home';
 
 const Home: React.FC = () => {
-  // const [eventId, setEventId] = useState('');
+  const [clubhouseLink, setClubhouseLink] = useState('');
 
-  // function getEventId(eventUrl: string) {
-  //   let url = new URL(eventUrl);
-  //   setEventId(url.pathname.replace('/event/', ''));
-  //   console.log(eventId);
-  // }
+  function handleChange(event: { target: HTMLInputElement }) {
+    setClubhouseLink(event.target.value);
+    console.log(clubhouseLink);
+  }
+
+  function handlePaste(event: React.ClipboardEvent) {
+    const pastedValue = event.clipboardData.getData("text")
+    if(isURL(pastedValue)){
+      console.log('é uma url');
+    }
+  }
+
+  function handleSubmit() {}
 
   return (
     <>
@@ -39,9 +48,10 @@ const Home: React.FC = () => {
       <Header />
       <Container>
         <Card>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
-            <input type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+            <input onChange={handleChange} onPaste={handlePaste} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+            <button type="submit">Generate</button>
           </Form>
         </Card>
         <WhyUseIt>

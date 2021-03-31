@@ -6,7 +6,6 @@ export const Container = styled.footer`
     width: 100%;
     text-align: center;
     margin-bottom: 0.5rem;
-    /* margin-top: 2rem; */
 
     font-size: 0.9rem;
     opacity: 50%;

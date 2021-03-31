@@ -55,6 +55,25 @@ export const Form = styled.form`
             opacity: 50%;
         }
     }
+
+    button {
+    height: 3rem;
+    color: #ffad30;
+    font-size: 1em;
+    background: transparent;
+    padding: 0.25em 1em;
+    border: 2px solid #ffad30;
+    border-radius: 10px;
+
+    margin-top: 2rem;
+    
+    transition: color 0.2s, border 0.2s;
+
+    &:hover {
+    color: ${shade(0.1, '#ffad30')};
+    border: 2px solid ${shade(0., '#ffad30')};
+  }
+    }
 `;
 
 export const WhyUseIt = styled.div`

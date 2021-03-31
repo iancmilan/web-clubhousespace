@@ -52,16 +52,16 @@ const Event: React.FC<dataProps> = (props) => {
 
     if (!data) return (
         <Container>
-            <Header />
+        <Header />
             <SkeletonTheme color="#e6e4d8" highlightColor="#F1EFE4">
                 <Skeleton height='18rem' width="39rem"/>
             </SkeletonTheme>
-            <Footer />
+        <Footer />
         </Container>
     )
 
     return (
-        <Container>
+        <>
             <Head>
                 <title>{data.eventName} | Clubhouse Space</title>
 
@@ -82,37 +82,39 @@ const Event: React.FC<dataProps> = (props) => {
                 <meta property="twitter:image" content={`https://api-clubhousespace.herokuapp.com/preview/${router.query.eventId}.png`} />
             </Head>
             <Header />
-            <Card onClick={handleLinkToClubhouse}>
-                <CardHeader>
-                    <p>{data.eventWeekDay} {data.eventMonthDay}</p>
-                    <strong>{data.eventName}</strong>
-                    {data.eventClub && (
-                        <div>
-                            <span>From {data.eventClub}</span>
-                            <img src="/icon_house.svg"/>
-                        </div>
-                    )}
-                </CardHeader>
-                <Guests>
-                    {data.eventGuestsImg.map(img => (
-                        <img 
-                            key={img}
-                            src={img}
-                            style={data.eventGuestsImg.length == 1 ? {width: '4.8rem', height: '4.8rem', } : data.eventGuestsImg.length <= 3 ? {width:'3.8rem', height:'3.8rem',} : {width:'3.4rem', height:'3.4rem',}}
-                        />
-                    ))}
-                    { data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length > 0 && <strong> +{ data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length} </strong> }
-                </Guests>
-                <Infos>
-                    <p>{data.eventGuestsNames}</p>
-                    <span>{data.eventDescription.replace('                                          —                 ', '')}</span>
-                </Infos>
-            </Card>
-            <Button onClick={handleLinkToClubhouse}>
-                Open event in Clubhouse
-            </Button>
+            <Container>
+                <Card onClick={handleLinkToClubhouse}>
+                    <CardHeader>
+                        <p>{data.eventWeekDay} {data.eventMonthDay}</p>
+                        <strong>{data.eventName}</strong>
+                        {data.eventClub && (
+                            <div>
+                                <span>From {data.eventClub}</span>
+                                <img src="/icon_house.svg"/>
+                            </div>
+                        )}
+                    </CardHeader>
+                    <Guests>
+                        {data.eventGuestsImg.map(img => (
+                            <img 
+                                key={img}
+                                src={img}
+                                style={data.eventGuestsImg.length == 1 ? {width: '4.8rem', height: '4.8rem', } : data.eventGuestsImg.length <= 3 ? {width:'3.8rem', height:'3.8rem',} : {width:'3.4rem', height:'3.4rem',}}
+                            />
+                        ))}
+                        { data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length > 0 && <strong> +{ data.eventGuestsNames.split(", ").length - data.eventGuestsImg.length} </strong> }
+                    </Guests>
+                    <Infos>
+                        <p>{data.eventGuestsNames}</p>
+                        <span>{data.eventDescription.replace('                                          —                 ', '')}</span>
+                    </Infos>
+                </Card>
+                <Button onClick={handleLinkToClubhouse}>
+                    Open event in Clubhouse
+                </Button>
+            </Container>
             <Footer />
-        </Container>
+        </>
     );
 }
 
