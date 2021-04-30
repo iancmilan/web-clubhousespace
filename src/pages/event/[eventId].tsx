@@ -5,6 +5,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 import api from '../../services/api';
 
@@ -24,41 +25,54 @@ interface dataProps{
     data: EventData;
 }
 
-export async function getServerSideProps(ctx) {
-    const { eventId } = ctx.query;
-    const res = await fetch(`https://api-clubhousespace.herokuapp.com/event/${eventId}`);
-    const data: dataProps = await res.json();
-    return { props: { data } };
+export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+        paths: [
+            { params: {eventId: 'PQ488GWn'} }
+        ],
+        fallback: 'blocking',
+    }
 }
 
-const Event: React.FC<dataProps> = (props) => {
-    const router = useRouter();
-    const initialData = props.data;
+export const getStaticProps: GetStaticProps = async (ctx) => {
+    const { eventId } = ctx.params;
+    const { data } = await api.get(`/event/${eventId}`);
+    // const res = await fetch(`https://api-clubhousespace.herokuapp.com/event/${eventId}`);
+    // const data: dataProps = await res.json();
+    return {
+        props: { data },
+        revalidate: 60 * 60 * 24, // 24 hours
+    };
+}
 
-    const { data, error } = useSWR<EventData>(`/event/${router.query.eventId}`, async url => {
-        const response = await api.get(url);
-        return response.data;
-    }, { initialData });
+const Event: React.FC<dataProps> = ({ data }) => {
+    const router = useRouter();
+    // const initialData = props.data;
+
+    // const { data, error } = useSWR<EventData>(`/event/${router.query.eventId}`, async url => {
+    //     const response = await api.get(url);
+    //     return response.data;
+    // }, { initialData });
 
     function handleLinkToClubhouse(){
         window.location.href = `https://www.joinclubhouse.com/event/${router.query.eventId}`;
     }
 
-    if (error) return (
-        <Container>
-            <h1 style={{ color: 'red', }}>Failed to load data</h1>
-        </Container>
-    );
+    // if (error) return (
+    //     <Container>
+    //         <h1 style={{ color: 'red', }}>Failed to load data</h1>
+    //     </Container>
+    // );
 
-    if (!data) return (
-        <Container>
-        <Header />
-            <SkeletonTheme color="#e6e4d8" highlightColor="#F1EFE4">
-                <Skeleton height='18rem' width="39rem"/>
-            </SkeletonTheme>
-        <Footer />
-        </Container>
-    )
+    // if (!data) return (
+    //     <Container>
+    //     <Header />
+    //         <SkeletonTheme color="#e6e4d8" highlightColor="#F1EFE4">
+    //             <Skeleton height='18rem' width="39rem"/>
+    //         </SkeletonTheme>
+    //     <Footer />
+    //     </Container>
+    // )
 
     return (
         <>
