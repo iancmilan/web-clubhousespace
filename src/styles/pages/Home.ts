@@ -57,22 +57,27 @@ export const Form = styled.form`
     }
 
     button {
-    height: 3rem;
-    color: #ffad30;
-    font-size: 1em;
-    background: transparent;
-    padding: 0.25em 1em;
-    border: 2px solid #ffad30;
-    border-radius: 10px;
+        height: 3rem;
+        color: #ffad30;
+        font-size: 1em;
+        background: transparent;
+        padding: 0.25em 1em;
+        border: 2px solid #ffad30;
+        border-radius: 10px;
+        outline: none;
 
-    margin-top: 2rem;
-    
-    transition: color 0.2s, border 0.2s;
+        margin-top: 2rem;
+        
+        transition: color 0.2s, border 0.2s;
 
-    &:hover {
-    color: ${shade(0.1, '#ffad30')};
-    border: 2px solid ${shade(0., '#ffad30')};
-  }
+        &:hover {
+            color: ${shade(0.1, '#ffad30')};
+            border: 2px solid ${shade(0.1, '#ffad30')};
+        }
+
+        &:focus {
+            box-shadow: 0 0 0 1px ${shade(0.1, '#ffad30')};
+        }
     }
 `;
 
@@ -121,5 +126,63 @@ export const Why = styled.div`
         height: 15rem;
         border-radius: 5%;
         box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+    }
+`;
+
+export const ImageWrapper = styled.div`
+    margin-top: 1rem;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    width: 35rem;
+
+    img {
+        border-radius: 10px;
+    }
+`;
+
+export const LinkField = styled.div`
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: row;
+    width: 35rem;
+
+    button {
+        height: 3rem;
+        color: #ffad30;
+        font-size: 1em;
+        background: transparent;
+        padding: 0.25em 1em;
+        border: 2px solid #ffad30;
+        border-radius: 10px;
+        outline: none;
+
+        
+        transition: color 0.2s, border 0.2s;
+
+        &:hover {
+            color: ${shade(0.1, '#ffad30')};
+            border: 2px solid ${shade(0.1, '#ffad30')};
+        }
+    }
+
+    input {
+        height: 3rem;
+        padding: 5px;
+        border-radius: 10px;
+        color: rgba(0,0,0,0.5);
+        border: 1px solid #F1EFE4;
+        outline: 0;
+        flex: 1;
+        margin-right: 0.5rem;
+
+        &:focus {
+            box-shadow: 0 0 0 1px ${shade(0.2, '#F1EFE4')};
+        }
+
+        &::placeholder {
+            opacity: 50%;
+        }
     }
 `;

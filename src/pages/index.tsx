@@ -1,27 +1,30 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Image from 'next/image';
+import Link from 'next/link';
+import { HiClipboardCopy } from "react-icons/hi";
 import isURL from 'validator/lib/isURL';
 
-import { Container, Card, Form, WhyUseIt, Why } from '../styles/pages/Home';
+import { Container, Card, Form, WhyUseIt, Why, ImageWrapper, LinkField } from '../styles/pages/Home';
 
 const Home: React.FC = () => {
   const [clubhouseLink, setClubhouseLink] = useState('');
+  const [showPreviewImage, setShowPreviewImage] = useState(false);
+  const [eventId, setEventId] = useState('');
 
-  function handleChange(event: { target: HTMLInputElement }) {
-    setClubhouseLink(event.target.value);
-    console.log(clubhouseLink);
+  // function handleChange(event: { target: HTMLInputElement }) {
+  //   setClubhouseLink(event.target.value);
+  //   console.log(clubhouseLink);
+  // }
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const arr = clubhouseLink.split('https://www.joinclubhouse.com/event/');
+    setEventId(arr[1]);
+    setShowPreviewImage(true);
   }
-
-  function handlePaste(event: React.ClipboardEvent) {
-    const pastedValue = event.clipboardData.getData("text")
-    if(isURL(pastedValue)){
-      console.log('é uma url');
-    }
-  }
-
-  function handleSubmit() {}
 
   return (
     <>
@@ -50,10 +53,32 @@ const Home: React.FC = () => {
         <Card>
           <Form onSubmit={handleSubmit}>
             <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
-            <input onChange={handleChange} onPaste={handlePaste} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+            <input onChange={event => setClubhouseLink(event.target.value)} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
             <button type="submit">Generate</button>
           </Form>
         </Card>
+        { showPreviewImage && (
+          <>
+          <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Your preview image will look like this <strong style={{ fontSize: '1.4rem' }}>👇</strong> </span>
+          <ImageWrapper>
+            <Link href={`/event/${eventId}`}>
+              <a>
+                <Image
+                    src={`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`}
+                    alt="Preview image"
+                    width={1200}
+                    height={628}
+                />
+              </a>
+            </Link>
+          </ImageWrapper>
+          <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Copy the link to share on social media!</span>
+          <LinkField>
+            <input type="text" id="linkField" value={`https://www.joinclubhouse.space/event/${eventId}`}/>
+            <button type="button" onClick={() => {navigator.clipboard.writeText(`https://www.joinclubhouse.space/event/${eventId}`)}}><HiClipboardCopy size={'1.3rem'} style={{ verticalAlign: 'middle' }}/></button>
+          </LinkField>
+          </>
+          ) }
         <WhyUseIt>
           <Why>
             <header>
