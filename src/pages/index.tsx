@@ -21,8 +21,7 @@ const Home: React.FC = () => {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const arr = clubhouseLink.split('https://www.joinclubhouse.com/event/');
-    setEventId(arr[1]);
+    setEventId(clubhouseLink.split('/event/')[1]);
     setShowPreviewImage(true);
   }
 
