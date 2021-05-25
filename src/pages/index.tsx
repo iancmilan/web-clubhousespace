@@ -57,48 +57,49 @@ const Home: React.FC = () => {
             <button type="submit">Generate</button>
           </Form>
         </Card>
-        { showPreviewImage && (
+        { showPreviewImage ? (
           <>
-          <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Your preview image will look like this <strong style={{ fontSize: '1.4rem' }}>👇</strong> </span>
-          <ImageWrapper>
-            <Link href={`/event/${eventId}`}>
-              <a>
-                <Image
-                    src={`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`}
-                    alt="Preview image"
-                    width={1200}
-                    height={628}
-                />
-              </a>
-            </Link>
-          </ImageWrapper>
-          <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Copy the link to share on social media!</span>
-          <LinkField>
-            <input type="text" id="linkField" value={`https://www.joinclubhouse.space/event/${eventId}`}/>
-            <button type="button" onClick={() => {navigator.clipboard.writeText(`https://www.joinclubhouse.space/event/${eventId}`)}}><HiClipboardCopy size={'1.3rem'} style={{ verticalAlign: 'middle' }}/></button>
-          </LinkField>
+            <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Your preview image will look like this <strong style={{ fontSize: '1.4rem' }}>👇</strong> </span>
+            <ImageWrapper>
+              <Link href={`/event/${eventId}`}>
+                <a>
+                  <Image
+                      src={`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`}
+                      alt="Preview image"
+                      width={1200}
+                      height={628}
+                  />
+                </a>
+              </Link>
+            </ImageWrapper>
+            <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Copy the link to share on social media!</span>
+            <LinkField>
+              <input type="text" id="linkField" value={`https://www.joinclubhouse.space/event/${eventId}`}/>
+              <button type="button" onClick={() => {navigator.clipboard.writeText(`https://www.joinclubhouse.space/event/${eventId}`)}}><HiClipboardCopy size={'1.3rem'} style={{ verticalAlign: 'middle' }}/></button>
+            </LinkField>
           </>
-          ) }
-        <WhyUseIt>
-          <Why>
-            <header>
-              <span>Without our link</span>
-              <img src="/withoutOurLink.png" alt="Without Our Link" />
-            </header>
-            <div>
-              <img src="/withoutOurLinkImg.png" alt="With our link image" />
-            </div>
-          </Why>
-          <Why>
-            <header>
-              <span>With our link</span>
-              <img src="/withOurLink.png" alt="With Our Link"/>
-            </header>
-            <div>
-              <img src="/withOurLinkImg.png" alt="Without our link image"/>
-            </div>
-          </Why>
-        </WhyUseIt>
+        ) : (
+          <WhyUseIt>
+            <Why>
+              <header>
+                <span>Without our link</span>
+                <img src="/withoutOurLink.png" alt="Without Our Link" />
+              </header>
+              <div>
+                <img src="/withoutOurLinkImg.png" alt="With our link image" />
+              </div>
+            </Why>
+            <Why>
+              <header>
+                <span>With our link</span>
+                <img src="/withOurLink.png" alt="With Our Link"/>
+              </header>
+              <div>
+                <img src="/withOurLinkImg.png" alt="Without our link image"/>
+              </div>
+            </Why>
+          </WhyUseIt>
+        ) }
       </Container>
       <Footer />
     </>
