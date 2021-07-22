@@ -4,14 +4,17 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from 'next/image';
 import Link from 'next/link';
-import { HiClipboardCopy } from "react-icons/hi";
+import { HiDownload } from "react-icons/hi";
 import isURL from 'validator/lib/isURL';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { saveAs } from 'file-saver';
 
 import { Container, Card, Form, WhyUseIt, Why, ImageWrapper, LinkField } from '../styles/pages/Home';
 
 const Home: React.FC = () => {
   const [clubhouseLink, setClubhouseLink] = useState('');
   const [showPreviewImage, setShowPreviewImage] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(true);
   const [eventId, setEventId] = useState('');
 
   // function handleChange(event: { target: HTMLInputElement }) {
@@ -23,6 +26,15 @@ const Home: React.FC = () => {
     e.preventDefault();
     setEventId(clubhouseLink.split('/event/')[1]);
     setShowPreviewImage(true);
+  }
+
+  function handleLoadImage() {
+    setImageLoaded(false);
+    // console.log("teste");
+  }
+
+  function handleDownloadImg() {
+    saveAs(`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`, `${eventId}.png`);
   }
 
   return (
@@ -51,50 +63,75 @@ const Home: React.FC = () => {
       <Container>
         <Card>
           <Form onSubmit={handleSubmit}>
-            <strong>Insert the link of your Clubhouse event to generate our link to share on social media.</strong>
+            <strong>Insert your Clubhouse event link to generate a cool image to share on social media.</strong>
             <input onChange={event => setClubhouseLink(event.target.value)} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
             <button type="submit">Generate</button>
           </Form>
         </Card>
         { showPreviewImage ? (
           <>
-            <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Your preview image will look like this <strong style={{ fontSize: '1.4rem' }}>👇</strong> </span>
+            {
+              imageLoaded ? (
+                <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Generating...</span>
+              ) : (
+                <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Here's your image <strong style={{ fontSize: '1.4rem' }}>👇</strong> </span>
+              )
+            }
             <ImageWrapper>
               <Link href={`/event/${eventId}`}>
                 <a>
+                {
+                  imageLoaded && (
+                    <SkeletonTheme color="#F1EFE4" highlightColor="#faf4eb">
+                      <Skeleton width='35rem'/>
+                    </SkeletonTheme>
+                  )
+                }
                   <Image
                       src={`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`}
                       alt="Preview image"
                       width={1200}
                       height={628}
+                      onLoad={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src.indexOf('data:image/gif;base64') < 0 && handleLoadImage();
+                      }}
                   />
                 </a>
               </Link>
             </ImageWrapper>
-            <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem' }}>Copy the link to share on social media!</span>
-            <LinkField>
-              <input type="text" id="linkField" value={`https://www.joinclubhouse.space/event/${eventId}`}/>
-              <button type="button" onClick={() => {navigator.clipboard.writeText(`https://www.joinclubhouse.space/event/${eventId}`)}}><HiClipboardCopy size={'1.3rem'} style={{ verticalAlign: 'middle' }}/></button>
-            </LinkField>
+            {
+              !imageLoaded && (
+                <LinkField>
+                  <span style={{ fontWeight: 600, opacity: '50%', marginTop: '1rem', marginRight: '1rem'}}>Download </span>
+                  <button type="button" onClick={handleDownloadImg}>
+                    <HiDownload size={'1.3rem'} style={{ verticalAlign: 'middle' }}/>
+                  </button>
+
+                    {/* <input type="text" id="linkField" value={`https://www.joinclubhouse.space/event/${eventId}`}/> */}
+                    {/* <button type="button" onClick={() => {navigator.clipboard.writeText(`https://www.joinclubhouse.space/event/${eventId}`)}}><HiClipboardCopy size={'1.3rem'} style={{ verticalAlign: 'middle' }}/></button> */}
+                </LinkField>
+              )
+            }
           </>
         ) : (
           <WhyUseIt>
             <Why>
               <header>
-                <span>Without our link</span>
-                <img src="/withoutOurLink.png" alt="Without Our Link" />
+                <span>Without an image</span>
+                <img src="/withoutOurLink.png" alt="Without an image" />
               </header>
               <div>
-                <img src="/withoutOurLinkImg.png" alt="With our link image" />
+                <img src="/withoutOurLinkImg.png" alt="Without an image" />
               </div>
             </Why>
             <Why>
               <header>
-                <span>With our link</span>
-                <img src="/withOurLink.png" alt="With Our Link"/>
+                <span>With an image</span>
+                <img src="/withOurLink.png" alt="With an image"/>
               </header>
               <div>
-                <img src="/withOurLinkImg.png" alt="Without our link image"/>
+                <img src="/withOurLinkImg.png" alt="With an image"/>
               </div>
             </Why>
           </WhyUseIt>

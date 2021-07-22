@@ -55,7 +55,7 @@ const Event: React.FC<dataProps> = ({ data }) => {
     // }, { initialData });
 
     function handleLinkToClubhouse(){
-        window.location.href = `https://www.joinclubhouse.com/event/${router.query.eventId}`;
+        window.location.href = `https://www.clubhouse.com/event/${router.query.eventId}`;
     }
 
     // if (error) return (
