@@ -56,7 +56,7 @@ const Home: React.FC = () => {
         <meta property="og:url" content="https://joinclubhouse.space/" />
         <meta property="og:title" content="Clubhouse Space" />
         <meta property="og:description" content="Generate a cool preview image to share your Clubhouse events on social media!" />
-        <meta property="og:image" content="/whyUseIt.png" />
+        <meta property="og:image" content="https://www.joinclubhouse.space/whyUseIt.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
 
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
         <meta property="twitter:url" content="https://joinclubhouse.space/" />
         <meta property="twitter:title" content="Cubhouse Space" />
         <meta property="twitter:description" content="Generate a cool preview image to share your Clubhouse events on social media!" />
-        <meta property="twitter:image" content="/whyUseIt.png" />
+        <meta property="twitter:image" content="https://www.joinclubhouse.space/whyUseIt.png" />
       </Head>
       <Header />
       <Container>
