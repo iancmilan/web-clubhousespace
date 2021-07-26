@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiDownload } from "react-icons/hi";
-import isURL from 'validator/lib/isURL';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { saveAs } from 'file-saver';
 
@@ -17,11 +16,6 @@ const Home: React.FC = () => {
   const [imageLoaded, setImageLoaded] = useState(true);
   const [eventId, setEventId] = useState('');
   const [validUrl, setValidUrl] = useState(false);
-
-  // function handleChange(event: { target: HTMLInputElement }) {
-  //   setClubhouseLink(event.target.value);
-  //   console.log(clubhouseLink);
-  // }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -56,21 +50,21 @@ const Home: React.FC = () => {
         <title>Cubhouse Space</title>
 
         <meta name="title" content="CubhouseSpace" />
-        <meta name="description" content="Generate a link with a cool preview image to share your Clubhouse events on social media!" />
+        <meta name="description" content="Generate a cool preview image to share your Clubhouse events on social media!" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://joinclubhouse.space/" />
         <meta property="og:title" content="Clubhouse Space" />
-        <meta property="og:description" content="Generate a link with a cool preview image to share your Clubhouse events on social media!" />
-        <meta property="og:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+        <meta property="og:description" content="Generate a cool preview image to share your Clubhouse events on social media!" />
+        <meta property="og:image" content="/whyUseIt.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://joinclubhouse.space/" />
         <meta property="twitter:title" content="Cubhouse Space" />
-        <meta property="twitter:description" content="Generate a link with a cool preview image to share your Clubhouse events on social media!" />
-        <meta property="twitter:image" content="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" />
+        <meta property="twitter:description" content="Generate a cool preview image to share your Clubhouse events on social media!" />
+        <meta property="twitter:image" content="/whyUseIt.png" />
       </Head>
       <Header />
       <Container>
