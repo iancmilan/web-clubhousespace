@@ -78,6 +78,11 @@ export const Form = styled.form`
         &:focus {
             box-shadow: 0 0 0 1px ${shade(0.1, '#ffad30')};
         }
+
+        &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     }
 `;
 

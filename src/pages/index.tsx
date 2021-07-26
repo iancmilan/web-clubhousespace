@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from 'next/image';
@@ -16,6 +16,7 @@ const Home: React.FC = () => {
   const [showPreviewImage, setShowPreviewImage] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(true);
   const [eventId, setEventId] = useState('');
+  const [validUrl, setValidUrl] = useState(false);
 
   // function handleChange(event: { target: HTMLInputElement }) {
   //   setClubhouseLink(event.target.value);
@@ -35,6 +36,18 @@ const Home: React.FC = () => {
 
   function handleDownloadImg() {
     saveAs(`https://api-clubhousespace.herokuapp.com/preview/${eventId}.png`, `${eventId}.png`);
+  }
+
+  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    const urlRegex = /^(https:\/\/www.joinclubhouse\.|https:\/\/www.clubhouse\.)com\/event\/[a-zA-z0-9]{8}$/;
+
+    if(e.target.value.match(urlRegex)) {
+      setValidUrl(true);
+      setClubhouseLink(e.target.value);
+    }else {
+      setValidUrl(false);
+      setClubhouseLink(e.target.value);
+    }
   }
 
   return (
@@ -64,8 +77,8 @@ const Home: React.FC = () => {
         <Card>
           <Form onSubmit={handleSubmit}>
             <strong>Insert your Clubhouse event link to generate a cool image to share on social media.</strong>
-            <input onChange={event => setClubhouseLink(event.target.value)} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
-            <button type="submit">Generate</button>
+            <input onChange={event => handleOnChange(event)} value={clubhouseLink} type="text" name="eventLink" id="eventLink" placeholder="https://www.joinclubhouse.com/event/..." />
+            <button type="submit" disabled={!validUrl} >Generate</button>
           </Form>
         </Card>
         { showPreviewImage ? (
